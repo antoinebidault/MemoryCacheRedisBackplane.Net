@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Simple Redis backplane service for cache invalidation</Description>
+    <Authors>antoinebidault</Authors>
+    <Company>Dastra</Company>
+    <PackageProjectUrl>https://github.com/antoinebidault/MemoryCacheRedisBackplane.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/antoinebidault/MemoryCacheRedisBackplane.Net</RepositoryUrl>
+    <PackageIcon>MemoryCacheRedisBackplane.Net.png</PackageIcon>
+    <RepositoryType>Open Source</RepositoryType>
+    <PackageTags>Cache, Caching, Memory cache, Redis, Cache invalidation, C#, .NET Core</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Content Include="MemoryCacheRedisBackplane.Net.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.88" />
+   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MemoryCacheRedisBackplane.Net.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
