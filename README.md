@@ -1,6 +1,5 @@
 
-
-[![Build status](https://ci.appveyor.com/api/projects/status/r430k8vb29wjjsfd?svg=true)](https://ci.appveyor.com/project/antoinebidault/jsonruleengine-net)
+[![Build status](https://ci.appveyor.com/api/projects/status/sa0tjdyyfev17uq4?svg=true)](https://ci.appveyor.com/project/antoinebidault/memorycacheredisbackplane-net)
 ![Nuget](https://img.shields.io/nuget/v/MemoryCacheRedisBackplane.Net)
 
 ![Logo](/MemoryCacheRedisBackplane.Net/MemoryCacheRedisBackplane.Net.png)
