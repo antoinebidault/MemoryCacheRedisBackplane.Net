@@ -23,7 +23,7 @@ namespace MemoryCacheRedisBackplane.Net
 
         public Task InvalidateAsync(string key)
         {
-            // _cache.Remove(key);
+            _cache.Remove(key);
             return _redis.PublishAsync(key);
         }
 

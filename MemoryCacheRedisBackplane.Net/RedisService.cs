@@ -13,11 +13,13 @@ namespace MemoryCacheRedisBackplane.Net
         private ConnectionMultiplexer _redis;
         private int _retry = 1;
         private DateTime? _lastFailureDate = null;
+        private Guid _originId;
         private MemoryCacheRedisBackplaneOptions _options;
         private ISubscriber _sub;
 
         internal RedisService(MemoryCacheRedisBackplaneOptions options)
         {
+            this._originId = Guid.NewGuid();
             this._options = options;
             this.Connect(options.RedisConnectionString);
             _redis.ConnectionFailed += (s, e) =>
