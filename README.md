@@ -24,7 +24,7 @@ services.AddMemoryCache();
 services.AddMemoryCacheRedisBackplane(Configuration.GetConnectionString("Redis"));
 ```
 
-Then in your controllers :
+Then in your controllers, if you need to invalidate the cache :
 ```CSharp
   public TestController(IMemoryCacheInvalidator cacheInvalidator)
   {
@@ -38,5 +38,4 @@ Then in your controllers :
       _cacheInvalidator.InvalidateAsync(_cacheKey);
       return Ok();
   }
-
 ```
