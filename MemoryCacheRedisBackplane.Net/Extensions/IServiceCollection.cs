@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MemoryCacheRedisBackplane.Net
 {
+    /// <summary>
+    /// Memory cache extensions
+    /// </summary>
     public static class IServiceCollectionExtensions
     {
         /// <summary>
@@ -40,6 +43,17 @@ namespace MemoryCacheRedisBackplane.Net
             services.AddSingleton(options);
 
             return services.AddSingleton<IMemoryCacheInvalidator, MemoryCacheRedisBackplane>();
+        }
+
+        /// <summary>
+        /// This will register an idle backplane that is not binded to the Redis server. 
+        /// The IMemoryCacheInvalidator will only clear the memory cache
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddMemoryCacheDevelopmentBackplane(this IServiceCollection services)
+        {
+            return services.AddSingleton<IMemoryCacheInvalidator, MemoryCacheDevelopmentBackplane>();
         }
     }
 }

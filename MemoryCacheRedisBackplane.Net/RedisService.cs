@@ -13,7 +13,7 @@ namespace MemoryCacheRedisBackplane.Net
         private ConnectionMultiplexer _redis;
         private int _retry = 1;
         private DateTime? _lastFailureDate = null;
-        private Guid _originId;
+        private Guid _originId ;
         private MemoryCacheRedisBackplaneOptions _options;
         private ISubscriber _sub;
 
