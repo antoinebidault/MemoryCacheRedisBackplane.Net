@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoryCacheRedisBackplane.Net
 {
-    internal class MemoryCacheRedisBackplane : IMemoryCacheInvalidator
+    internal class MemoryCacheRedisBackplane : IMemoryCacheInvalidator, IDisposable
     {
         private RedisService _redis;
         private IMemoryCache _cache;
@@ -21,11 +21,20 @@ namespace MemoryCacheRedisBackplane.Net
             });
         }
 
-        public Task InvalidateAsync(string key)
+        public async Task InvalidateAsync(string key)
         {
-            _cache.Remove(key);
-            return _redis.PublishAsync(key);
+            await Task.Run(() => Invalidate(key));
         }
 
+        public void Invalidate(string key)
+        {
+            _cache.Remove(key);
+            _redis.Publish(key);
+        }
+
+        public void Dispose()
+        {
+            _redis.Dispose();
+        }
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace MemoryCacheRedisBackplane.Net
 {
 
-    internal class RedisService
+    internal class RedisService : IDisposable
     {
         private ConnectionMultiplexer _redis;
         private int _retry = 1;
         private DateTime? _lastFailureDate = null;
-        private Guid _originId ;
+        private Guid _originId = Guid.NewGuid();
         private MemoryCacheRedisBackplaneOptions _options;
         private ISubscriber _sub;
 
@@ -49,18 +49,45 @@ namespace MemoryCacheRedisBackplane.Net
             {
                 if (message.HasValue)
                 {
-                    subscriptionCallback(message.ToString());
+                    string value = message.ToString();
+                    if (value.StartsWith(_originId.ToString()))
+                    {
+                        return;
+                    }
+
+                    subscriptionCallback(RemoveOriginId(value));
                 }
-            });
+            }, CommandFlags.FireAndForget);
         }
-        internal Task PublishAsync(string key)
+        internal void Publish(string key)
         {
             if (_redis.IsConnected)
             {
-                return _sub.PublishAsync(_options.EventSubscriptionName, key);
+                _sub.Publish(_options.EventSubscriptionName, AppendOriginId(key), CommandFlags.FireAndForget);
             }
-            return Task.CompletedTask;
         }
 
+        public void Dispose()
+        {
+            _sub.Unsubscribe(_options.EventSubscriptionName);
+            _redis.Close();
+            _redis.Dispose();
+        }
+
+        /// <summary>
+        /// Append the origin id to the key in order to identify the request origin
+        /// </summary>
+        private string AppendOriginId(string key)
+        {
+            return _originId.ToString() + "_" + key;
+        }
+
+        /// <summary>
+        /// Remove the origin id from string
+        /// </summary>
+        private string RemoveOriginId(string key)
+        {
+            return key.Substring(key.IndexOf("_") + 1, key.Length - key.IndexOf("_") - 1);
+        }
     }
 }

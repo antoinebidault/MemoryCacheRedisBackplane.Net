@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "redis1": {
+      "containerPorts": "6379:6379",
+      "secretStore": null,
+      "containerName": "redis",
+      "containerImage": "redis:alpine",
+      "resourceId": null,
+      "type": "redis.container",
+      "connectionId": "ConnectionStrings:Redis"
+    }
+  }
+}

@@ -10,6 +10,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMemoryCache();
 builder.Services.AddMemoryCacheRedisBackplane(builder.Configuration.GetConnectionString("Redis"));
+builder.Services.AddDistributedRedisCache(option =>
+{
+    option.Configuration = builder.Configuration["ConnectionStrings:Redis"];
+});
 
 var app = builder.Build();
 
