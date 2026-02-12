@@ -17,6 +17,11 @@ namespace MemoryCacheRedisBackplane.Net
             _cache = cache;
             _redis.Subscribe(c =>
             {
+                if (options.OnCacheInvalidation != null)
+                {
+                    options.OnCacheInvalidation(c);
+                }
+
                 _cache.Remove(c);
             });
         }

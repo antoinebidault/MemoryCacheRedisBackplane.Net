@@ -29,8 +29,8 @@
 
   <ItemGroup>
     <None Update="MemoryCacheRedisBackplane.Net.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
