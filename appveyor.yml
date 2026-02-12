@@ -10,7 +10,7 @@ build_script:
  # - ps: codecov -f "MemoryCacheRedisBackplane.Net.Tests/coverage.opencover.xml" -t $($env:CODECOV_TOKEN)
   - ps: dotnet build /p:configuration=Release /p:Version=$($env:appveyor_build_version)
 
-test: off
+test: false
 
 artifacts:
   - path: MemoryCacheRedisBackplane.Net\**\bin\release\*.nupkg
