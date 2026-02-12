@@ -19,6 +19,15 @@ namespace MemoryCacheRedisBackplane.Net
         /// Nb retry if connection failed
         /// </summary>
         public int NbRetry { get; set; }
+
+        /// <summary>
+        /// Event subscription name
+        /// </summary>
         public string EventSubscriptionName { get; set; } = "mem-cache-invalidation";
+
+        /// <summary>
+        /// Optional callback invoked when a cache invalidation event is received
+        /// </summary>
+        public Action<string> OnCacheInvalidation { get; set; }
     }
 }
